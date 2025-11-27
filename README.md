@@ -34,6 +34,13 @@
     ![server-running](./screenshots/server-running.png)
 
 
+### For Claude Code
+
+```
+claude mcp add-from-claude-desktop
+```
+
+
 ## Example
 
 ![example](./screenshots/example.png)
