@@ -1,6 +1,7 @@
 from contextlib import contextmanager
 
 import pyodbc
+import sqlparse
 from mcp.server.fastmcp import FastMCP
 
 from config import settings
@@ -22,7 +23,8 @@ def get_db():
 
 @mcp.tool()
 def execute_sql(sql: str) -> str:
-    if not sql.strip().upper().startswith("SELECT"):
+    parsed = sqlparse.parse(sql)
+    if not parsed or parsed[0].get_type() != "SELECT":
         return "Only SELECT queries are allowed."
     with get_db() as cursor:
         cursor.execute(sql)
